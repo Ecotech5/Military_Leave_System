@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="login-container">
+    <div class="card">
+        <h2>Login to System</h2>
+        <p class="text-center" style="margin-bottom: 20px;">Enter your service number to access the system</p>
+
+        <form method="POST">
+            <label>Service Number:</label>
+            <input type="text" name="service_number" placeholder="e.g., NG/A/001" required>
+
+            <button type="submit" class="btn btn-block">Login</button>
+        </form>
+
+        <hr style="margin: 20px 0;">
+
+        <div class="alert-info" style="margin-top: 20px;">
+            <strong>Demo Credentials:</strong><br>
+            Soldier: NG/A/001<br>
+            RSM: NG/A/007<br>
+            Admin Officer: NG/O/005<br>
+            Commander: NG/O/006
+        </div>
+
+        <div class="alert-warning"
+            style="background-color: #fff3cd; padding: 10px; border-radius: 5px; margin-top: 15px;">
+            <strong>Note:</strong> First, add personnel using the web interface after logging in as Admin Officer or
+            Commander.
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Soldiers Section -->
+<div class="card">
+    <h2>Soldiers ({{ soldiers|length }})</h2>
+    <div style="overflow-x: auto;">
+        <table>
+            <thead>
+                <tr>
+                    <th>Service Number</th>
+                    <th>Name</th>
+                    <th>Rank</th>
+                    <th>Unit</th>
+                    <th>Platoon</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for soldier in soldiers %}
+                <tr>
+                    <td>{{ soldier.service_number }}</td>
+                    <td>{{ soldier.name }}</td>
+                    <td>{{ soldier.rank }}</td>
+                    <td>{{ soldier.unit or '-' }}</td>
+                    <td>{{ soldier.platoon or '-' }}</td>
+                    <td>{{ soldier.phone or '-' }}</td>
+                    <td>{{ soldier.email or '-' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Officers Section -->
+<div class="card">
+    <h2>Officers ({{ officers|length }})</h2>
+    <div style="overflow-x: auto;">
+        <table>
+            <thead>
+                <tr>
+                    <th>Service Number</th>
+                    <th>Name</th>
+                    <th>Rank</th>
+                    <th>Unit</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for officer in officers %}
+                <tr>
+                    <td>{{ officer.service_number }}</td>
+                    <td>{{ officer.name }}</td>
+                    <td>{{ officer.rank }}</td>
+                    <td>{{ officer.unit or '-' }}</td>
+                    <td>{{ officer.phone or '-' }}</td>
+                    <td>{{ officer.email or '-' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

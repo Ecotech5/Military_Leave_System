@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <h2>RSM Review - Leave Request #{{ request.id }}</h2>
+
+    <div class="alert-info">
+        <strong>Requester:</strong> {{ request.personnel_name }} ({{ request.personnel_rank }})<br>
+        <strong>Service Number:</strong> {{ request.service_number }}<br>
+        <strong>Leave Type:</strong> {{ request.leave_type|capitalize }}<br>
+        <strong>Period:</strong> {{ request.start_date }} to {{ request.end_date }} ({{ request.total_days }} days)<br>
+        <strong>Reason:</strong> {{ request.reason }}
+    </div>
+
+    <form method="POST">
+        <label>Recommendation *</label>
+        <select name="recommendation" required>
+            <option value="recommend">Recommend - Forward to Admin Officer</option>
+            <option value="do_not_recommend">Do Not Recommend - Forward with negative recommendation</option>
+        </select>
+
+        <label>Comments</label>
+        <textarea name="comments" placeholder="Add your comments here..."></textarea>
+
+        <button type="submit" class="btn">Submit Review</button>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-warning">Cancel</a>
+    </form>
+</div>
+{% endblock %}

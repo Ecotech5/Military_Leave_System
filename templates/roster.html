@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <h2>Duty Roster</h2>
+
+    <form method="GET" action="{{ url_for('view_roster') }}" style="display: flex; gap: 10px; margin-bottom: 20px;">
+        <input type="date" name="date" value="{{ selected_date }}" style="flex: 1;">
+        <button type="submit" class="btn">View Roster</button>
+        {% if session.is_commander %}
+        <button type="button" class="btn btn-success"
+            onclick="document.getElementById('generateForm').style.display='block'">Generate Roster</button>
+        {% endif %}
+        <button type="button" id="printRoster" class="btn btn-info">Print</button>
+    </form>
+
+    {% if session.is_commander %}
+    <div id="generateForm"
+        style="display: none; margin-top: 20px; padding: 20px; background: #f5f5f5; border-radius: 10px;">
+        <h3>Generate New Roster</h3>
+        <form method="POST" action="{{ url_for('generate_roster') }}">
+            <div class="grid-2">
+                <div>
+                    <label>Start Date</label>
+                    <input type="date" name="start_date" value="{{ selected_date }}">
+                </div>
+                <div>
+                    <label>End Date (7 days default)</label>
+                    <input type="date" name="end_date">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Generate</button>
+            <button type="button" class="btn btn-warning"
+                onclick="document.getElementById('generateForm').style.display='none'">Cancel</button>
+        </form>
+    </div>
+    {% endif %}
+
+    {% if roster %}
+    {% set shifts = {'morning': [], 'evening': [], 'night': [], '24hr': []} %}
+    {% for duty in roster %}
+    {% set _ = shifts[duty.shift].append(duty) %}
+    {% endfor %}
+
+    {% for shift_name, duties in shifts.items() %}
+    {% if duties %}
+    <div class="card" style="margin-top: 20px;">
+        <h3>{{ shift_name|upper }} SHIFT</h3>
+        <div style="overflow-x: auto;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Duty Type</th>
+                        <th>Personnel Name</th>
+                        <th>Rank</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for duty in duties %}
+                    <tr>
+                        <td>{{ duty.duty_type|capitalize }}</td>
+                        <td>{{ duty.personnel_name }}</td>
+                        <td>{{ duty.personnel_rank }}</td>
+                        <td>{{ duty.notes or '-' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% else %}
+    <div class="alert-info">No duty assignments found for {{ selected_date }}.</div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <h2>Add New Personnel</h2>
+    <form method="POST">
+        <div class="grid-2">
+            <div>
+                <label>Service Number *</label>
+                <input type="text" name="service_number" placeholder="e.g., NG/A/001" required>
+            </div>
+            <div>
+                <label>Full Name *</label>
+                <input type="text" name="name" placeholder="Full Name" required>
+            </div>
+            <div>
+                <label>Rank *</label>
+                <select name="rank" required>
+                    <option value="">Select Rank</option>
+                    <optgroup label="Soldiers">
+                        <option value="Private">Private</option>
+                        <option value="Lance Corporal">Lance Corporal</option>
+                        <option value="Corporal">Corporal</option>
+                        <option value="Sergeant">Sergeant</option>
+                        <option value="Staff Sergeant">Staff Sergeant</option>
+                        <option value="Warrant Officer">Warrant Officer</option>
+                        <option value="Master Warrant Officer">Master Warrant Officer</option>
+                        <option value="Army Warrant Officer">Army Warrant Officer</option>
+                        <option value="RSM">RSM</option>
+                    </optgroup>
+                    <optgroup label="Officers">
+                        <option value="Second Lieutenant">Second Lieutenant</option>
+                        <option value="Lieutenant">Lieutenant</option>
+                        <option value="Captain">Captain</option>
+                        <option value="Major">Major</option>
+                        <option value="Lieutenant Colonel">Lieutenant Colonel</option>
+                        <option value="Colonel">Colonel</option>
+                        <option value="Brigadier General">Brigadier General</option>
+                        <option value="Major General">Major General</option>
+                        <option value="Admin Officer">Admin Officer</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div>
+                <label>Rank Category *</label>
+                <select name="rank_category" required>
+                    <option value="">Select Category</option>
+                    <option value="soldier">Soldier</option>
+                    <option value="officer">Officer</option>
+                </select>
+            </div>
+            <div>
+                <label>Rank Order *</label>
+                <input type="number" name="rank_order" placeholder="1-11" required>
+            </div>
+            <div>
+                <label>Unit</label>
+                <input type="text" name="unit" placeholder="e.g., Alpha Company">
+            </div>
+            <div>
+                <label>Platoon</label>
+                <input type="text" name="platoon" placeholder="e.g., 1st Platoon">
+            </div>
+            <div>
+                <label>Email</label>
+                <input type="email" name="email" placeholder="email@domain.com">
+            </div>
+            <div>
+                <label>Phone</label>
+                <input type="tel" name="phone" placeholder="08012345678">
+            </div>
+        </div>
+        <button type="submit" class="btn">Add Personnel</button>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-warning">Cancel</a>
+    </form>
+</div>
+{% endblock %}

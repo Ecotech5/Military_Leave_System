@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <h2>Commander Decision - Leave Request #{{ request.id }}</h2>
+
+    <div class="alert-info">
+        <strong>Requester:</strong> {{ request.personnel_name }} ({{ request.personnel_rank }})<br>
+        <strong>Service Number:</strong> {{ request.service_number }}<br>
+        <strong>Leave Type:</strong> {{ request.leave_type|capitalize }}<br>
+        <strong>Period:</strong> {{ request.start_date }} to {{ request.end_date }} ({{ request.total_days }} days)<br>
+        <strong>Reason:</strong> {{ request.reason }}
+    </div>
+
+    {% if request.rsm_name %}
+    <div class="alert-info">
+        <strong>RSM Recommendation:</strong> {{ request.rsm_recommendation|capitalize }}<br>
+        <strong>RSM Comments:</strong> {{ request.rsm_comments or 'No comments' }}
+    </div>
+    {% endif %}
+
+    <div class="alert-info">
+        <strong>Admin Officer Recommendation:</strong> {{ request.ao_recommendation|capitalize }}<br>
+        <strong>AO Comments:</strong> {{ request.ao_comments or 'No comments' }}
+    </div>
+
+    <form method="POST">
+        <label>Final Decision *</label>
+        <select name="decision" required>
+            <option value="approved">Approve Leave</option>
+            <option value="rejected">Reject Leave</option>
+        </select>
+
+        <label>Commander's Comments</label>
+        <textarea name="comments" placeholder="Add your final comments here..."></textarea>
+
+        <button type="submit" class="btn">Make Decision</button>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-warning">Cancel</a>
+    </form>
+</div>
+{% endblock %}
