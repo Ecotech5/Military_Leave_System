@@ -213,24 +213,60 @@ def add_personnel():
         return redirect(url_for('dashboard'))
 
     if request.method == 'POST':
-        manager = LeaveManager()
-        result = manager.add_personnel(
-            service_number=request.form['service_number'],
-            name=request.form['name'],
-            rank=request.form['rank'],
-            rank_category=request.form['rank_category'],
-            rank_order=int(request.form['rank_order']),
-            unit=request.form.get('unit', ''),
-            platoon=request.form.get('platoon', ''),
-            email=request.form.get('email', ''),
-            phone=request.form.get('phone', '')
-        )
-        manager.close()
+        try:
+            manager = LeaveManager()
 
-        if result['success']:
-            flash(result['message'], 'success')
-        else:
-            flash(result['error'], 'error')
+            # Get form data with proper error handling
+            service_number = request.form.get('service_number', '').strip()
+            name = request.form.get('name', '').strip()
+            rank = request.form.get('rank', '').strip()
+            rank_category = request.form.get('rank_category', '').strip()
+            rank_order_str = request.form.get('rank_order', '0')
+            unit = request.form.get('unit', '').strip()
+            platoon = request.form.get('platoon', '').strip()
+            email = request.form.get('email', '').strip()
+            phone = request.form.get('phone', '').strip()
+
+            # Validate required fields
+            if not service_number:
+                flash('Service Number is required', 'error')
+                return redirect(url_for('add_personnel'))
+            if not name:
+                flash('Name is required', 'error')
+                return redirect(url_for('add_personnel'))
+            if not rank:
+                flash('Rank is required', 'error')
+                return redirect(url_for('add_personnel'))
+            if not rank_category:
+                flash('Rank Category is required', 'error')
+                return redirect(url_for('add_personnel'))
+
+            # Convert rank_order to integer
+            try:
+                rank_order = int(rank_order_str)
+            except ValueError:
+                rank_order = 0
+
+            result = manager.add_personnel(
+                service_number=service_number,
+                name=name,
+                rank=rank,
+                rank_category=rank_category,
+                rank_order=rank_order,
+                unit=unit if unit else None,
+                platoon=platoon if platoon else None,
+                email=email if email else None,
+                phone=phone if phone else None
+            )
+            manager.close()
+
+            if result['success']:
+                flash(result['message'], 'success')
+            else:
+                flash(result['error'], 'error')
+        except Exception as e:
+            flash(f'Error adding personnel: {str(e)}', 'error')
+
         return redirect(url_for('dashboard'))
 
     return render_template('add_personnel.html', user=session)
@@ -254,12 +290,15 @@ def view_personnel():
     else:
         # Regular users see only themselves
         user = manager.get_personnel_by_id(session['user_id'])
-        if user['rank_category'] == 'soldier':
+        if user and user['rank_category'] == 'soldier':
             soldiers = [user]
             officers = []
-        else:
+        elif user:
             soldiers = []
             officers = [user]
+        else:
+            soldiers = []
+            officers = []
 
     manager.close()
     return render_template('view_personnel.html', soldiers=soldiers, officers=officers, user=session, can_view_all=can_view_all)

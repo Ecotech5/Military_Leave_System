@@ -1,8 +1,14 @@
 {% extends "base.html" %}
+<<<<<<< HEAD
 
 {% block content %}
 <div class="card" style="max-width: 600px; margin: 0 auto;">
     <h2>RSM Review - Request #{{ request.id }}</h2>
+=======
+{% block content %}
+<div class="card">
+    <h2>RSM Review - Leave Request #{{ request.id }}</h2>
+>>>>>>> aece6042afd0f3a350e00000ad8eef91899fe018
 
     <div class="alert-info">
         <strong>Requester:</strong> {{ request.personnel_name }} ({{ request.personnel_rank }})<br>
@@ -15,6 +21,7 @@
     <form method="POST">
         <label>Recommendation *</label>
         <select name="recommendation" required>
+<<<<<<< HEAD
             <option value="recommend">✅ Recommend - Forward to Admin Officer</option>
             <option value="do_not_recommend">❌ Do Not Recommend - Forward with negative recommendation</option>
         </select>
@@ -24,6 +31,17 @@
 
         <button type="submit" class="btn btn-block">Submit Review</button>
         <a href="{{ url_for('dashboard') }}" class="btn btn-warning btn-block">Cancel</a>
+=======
+            <option value="recommend">Recommend - Forward to Admin Officer</option>
+            <option value="do_not_recommend">Do Not Recommend - Forward with negative recommendation</option>
+        </select>
+
+        <label>Comments</label>
+        <textarea name="comments" placeholder="Add your comments here..."></textarea>
+
+        <button type="submit" class="btn">Submit Review</button>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-warning">Cancel</a>
+>>>>>>> aece6042afd0f3a350e00000ad8eef91899fe018
     </form>
 </div>
 {% endblock %}

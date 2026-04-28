@@ -1,7 +1,13 @@
 {% extends "base.html" %}
+<<<<<<< HEAD
 
 {% block content %}
 
+=======
+{% block content %}
+
+<!-- Stats Cards -->
+>>>>>>> aece6042afd0f3a350e00000ad8eef91899fe018
 <div class="stats-grid">
     <div class="stat-card">
         <h3>Leave Balance</h3>
@@ -18,6 +24,7 @@
         <div class="number">{{ pending_requests|length }}</div>
         <p>awaiting approval</p>
     </div>
+<<<<<<< HEAD
     <div class="stat-card">
         <h3>Account</h3>
         <div class="number"><a href="{{ url_for('change_password') }}">🔒 Change<br>Password</a></div>
@@ -38,11 +45,24 @@
     <h2>My Leave Balance</h2>
     <div class="progress-bar">
         <div class="progress-fill" style="width: {{ (used_days / 14 * 100) }}%;">
+=======
+</div>
+
+<!-- Leave Balance Progress -->
+<div class="card">
+    <h2>My Leave Balance</h2>
+    <div class="progress-bar">
+        <div class="progress-fill" style="width: {{ (used_days / 14 * 100) if used_days > 0 else 0 }}%;">
+>>>>>>> aece6042afd0f3a350e00000ad8eef91899fe018
             {{ used_days }}/14 days used
         </div>
     </div>
 </div>
 
+<<<<<<< HEAD
+=======
+<!-- Pending Approvals Section (for approvers) -->
+>>>>>>> aece6042afd0f3a350e00000ad8eef91899fe018
 {% if pending_requests %}
 <div class="card">
     <h2>Pending Approvals ({{ pending_requests|length }})</h2>
@@ -85,6 +105,10 @@
 </div>
 {% endif %}
 
+<<<<<<< HEAD
+=======
+<!-- My Leave Requests -->
+>>>>>>> aece6042afd0f3a350e00000ad8eef91899fe018
 <div class="card">
     <h2>My Leave Requests</h2>
     <div style="overflow-x: auto;">

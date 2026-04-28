@@ -49,8 +49,13 @@ def add_initial_personnel():
         INSERT OR IGNORE INTO personnel (
             service_number, name, rank, rank_category, rank_order, unit, email, phone, is_active
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+<<<<<<< HEAD
     """, ('NACWC/ADMIN', 'Admin Officer', 'Admin Officer', 'officer', ao_rank_order,
           'NACWC', 'admin@mil.ng', '08012340001', 1))
+=======
+    """, ('NG/O/ADMIN', 'Admin Officer', 'Admin Officer', 'officer', ao_rank_order,
+          'Battalion HQ', 'admin@mil.ng', '08012340001', 1))
+>>>>>>> aece6042afd0f3a350e00000ad8eef91899fe018
 
     ao_id = cursor.lastrowid
     if ao_id:
@@ -62,9 +67,15 @@ def add_initial_personnel():
 
     print("\n[2/4] Adding Commander...")
 
+<<<<<<< HEAD
     # Get rank order for Major General
     cursor.execute(
         "SELECT rank_order FROM ranks WHERE rank_name = 'MAJOR GENERAL'")
+=======
+    # Get rank order for Lieutenant Colonel
+    cursor.execute(
+        "SELECT rank_order FROM ranks WHERE rank_name = 'Lieutenant Colonel'")
+>>>>>>> aece6042afd0f3a350e00000ad8eef91899fe018
     result = cursor.fetchone()
     if result:
         cdr_rank_order = result[0]
@@ -76,6 +87,7 @@ def add_initial_personnel():
         INSERT OR IGNORE INTO personnel (
             service_number, name, rank, rank_category, rank_order, unit, email, phone, is_active
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+<<<<<<< HEAD
     """, ('NACWC/COM', 'Commander', 'Major General', 'officer', cdr_rank_order,
           'NACWC', 'commander@mil.ng', '08012340002', 1))
 
@@ -86,6 +98,18 @@ def add_initial_personnel():
         print("   Commander already exists")
         cursor.execute(
             "SELECT id FROM personnel WHERE rank = 'Major General'")
+=======
+    """, ('NG/O/COM', 'Commander', 'Lieutenant Colonel', 'officer', cdr_rank_order,
+          'Battalion HQ', 'commander@mil.ng', '08012340002', 1))
+
+    cdr_id = cursor.lastrowid
+    if cdr_id:
+        print(f"  ✓ Commander added (ID: {cdr_id})")
+    else:
+        print("  ⚠ Commander already exists")
+        cursor.execute(
+            "SELECT id FROM personnel WHERE rank = 'Lieutenant Colonel'")
+>>>>>>> aece6042afd0f3a350e00000ad8eef91899fe018
         cdr_id = cursor.fetchone()[0]
 
     print("\n[3/4] Adding RSM...")
@@ -103,6 +127,7 @@ def add_initial_personnel():
         INSERT OR IGNORE INTO personnel (
             service_number, name, rank, rank_category, rank_order, unit, email, phone, is_active
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+<<<<<<< HEAD
     """, ('NACWC/RSM', 'RSM', 'ARMY WARRANT OFFICER', 'soldier', rsm_rank_order,
           'NACWC', 'rsm@mil.ng', '08012340003', 1))
 
@@ -111,6 +136,16 @@ def add_initial_personnel():
         print(f"   RSM added (ID: {rsm_id})")
     else:
         print("   RSM already exists")
+=======
+    """, ('NG/A/RSM', 'RSM Adeyemi', 'RSM', 'soldier', rsm_rank_order,
+          'Battalion HQ', 'rsm@mil.ng', '08012340003', 1))
+
+    rsm_id = cursor.lastrowid
+    if rsm_id:
+        print(f"  ✓ RSM added (ID: {rsm_id})")
+    else:
+        print("  ⚠ RSM already exists")
+>>>>>>> aece6042afd0f3a350e00000ad8eef91899fe018
         cursor.execute("SELECT id FROM personnel WHERE rank = 'RSM'")
         rsm_id = cursor.fetchone()[0]
 
@@ -124,6 +159,23 @@ def add_initial_personnel():
     else:
         private_rank_order = 1  # Default fallback
 
+<<<<<<< HEAD
+=======
+    # Insert sample soldier
+    cursor.execute("""
+        INSERT OR IGNORE INTO personnel (
+            service_number, name, rank, rank_category, rank_order, unit, platoon, email, phone, is_active
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """, ('NG/A/001', 'Adebayo Ogunlesi', 'Private', 'soldier', private_rank_order,
+          'Alpha Company', '1st Platoon', 'soldier@mil.ng', '08012340004', 1))
+
+    soldier_id = cursor.lastrowid
+    if soldier_id:
+        print(f"  ✓ Sample soldier added (ID: {soldier_id})")
+    else:
+        print("  ⚠ Sample soldier already exists")
+
+>>>>>>> aece6042afd0f3a350e00000ad8eef91899fe018
     # Create leave entitlements for all personnel
     print("\n[5/5] Creating leave entitlements (14 days each)...")
 
@@ -137,7 +189,11 @@ def add_initial_personnel():
             VALUES (?, ?, 14, 0, 14)
         """, (person[0], current_year))
 
+<<<<<<< HEAD
     print(f"   Created leave entitlements for {len(all_personnel)} personnel")
+=======
+    print(f"  ✓ Created leave entitlements for {len(all_personnel)} personnel")
+>>>>>>> aece6042afd0f3a350e00000ad8eef91899fe018
 
     conn.commit()
     conn.close()
@@ -145,7 +201,16 @@ def add_initial_personnel():
     print("\n" + "=" * 60)
     print("INITIAL PERSONNEL ADDED SUCCESSFULLY!")
     print("=" * 60)
+<<<<<<< HEAD
 
+=======
+    print("\nYou can now log in with these credentials:")
+    print("-" * 40)
+    print("  Admin Officer:  NG/O/ADMIN")
+    print("  Commander:      NG/O/COM")
+    print("  RSM:            NG/A/RSM")
+    print("  Sample Soldier: NG/A/001")
+>>>>>>> aece6042afd0f3a350e00000ad8eef91899fe018
     print("-" * 40)
     print("\nNext step: Run 'python app.py' and log in!")
 

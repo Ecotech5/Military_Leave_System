@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+<<<<<<< HEAD
 
 {% block content %}
 <div class="card">
@@ -8,6 +9,11 @@
         They will be required to change it on first login.
     </div>
 
+=======
+{% block content %}
+<div class="card">
+    <h2>Add New Personnel</h2>
+>>>>>>> aece6042afd0f3a350e00000ad8eef91899fe018
     <form method="POST">
         <div class="grid-2">
             <div>
@@ -38,7 +44,10 @@
                         <option value="Lieutenant">Lieutenant</option>
                         <option value="Captain">Captain</option>
                         <option value="Major">Major</option>
+<<<<<<< HEAD
                         <option value="Chief of Staff">Chief of Staff</option>
+=======
+>>>>>>> aece6042afd0f3a350e00000ad8eef91899fe018
                         <option value="Lieutenant Colonel">Lieutenant Colonel</option>
                         <option value="Colonel">Colonel</option>
                         <option value="Brigadier General">Brigadier General</option>
@@ -57,8 +66,12 @@
             </div>
             <div>
                 <label>Rank Order *</label>
+<<<<<<< HEAD
                 <input type="number" name="rank_order" placeholder="Enter rank order number" required>
                 <small>Soldiers: 1-9, Officers: 1-12</small>
+=======
+                <input type="number" name="rank_order" placeholder="1-11" required>
+>>>>>>> aece6042afd0f3a350e00000ad8eef91899fe018
             </div>
             <div>
                 <label>Unit</label>
@@ -77,6 +90,7 @@
                 <input type="tel" name="phone" placeholder="08012345678">
             </div>
         </div>
+<<<<<<< HEAD
 
         <div style="margin-top: 20px;">
             <button type="submit" class="btn">Add Personnel</button>
@@ -141,4 +155,10 @@
         }
     });
 </script>
+=======
+        <button type="submit" class="btn">Add Personnel</button>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-warning">Cancel</a>
+    </form>
+</div>
+>>>>>>> aece6042afd0f3a350e00000ad8eef91899fe018
 {% endblock %}

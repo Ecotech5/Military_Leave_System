@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
 
+=======
+>>>>>>> aece6042afd0f3a350e00000ad8eef91899fe018
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nigerian Army Leave Management System</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<<<<<<< HEAD
 </head>
 
+=======
+    <link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇳🇬</text></svg>">
+</head>
+>>>>>>> aece6042afd0f3a350e00000ad8eef91899fe018
 <body>
     <div class="header">
         <div class="container">
@@ -15,7 +23,11 @@
             <p>Personnel Leave & Duty Roster Management</p>
         </div>
     </div>
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> aece6042afd0f3a350e00000ad8eef91899fe018
     {% if session.user_name %}
     <div class="nav">
         <div class="container">
@@ -23,6 +35,7 @@
             <a href="{{ url_for('submit_leave') }}">Request Leave</a>
             <a href="{{ url_for('view_roster') }}">Duty Roster</a>
             <a href="{{ url_for('view_personnel') }}">Personnel</a>
+<<<<<<< HEAD
 
             <!-- Add Personnel - visible to authorized roles -->
             {% if session.is_master_admin or session.is_ao or session.is_chief_of_staff or session.is_commander %}
@@ -30,10 +43,16 @@
             {% endif %}
 
             <a href="{{ url_for('change_password') }}">🔒 Change Password</a>
+=======
+            {% if session.is_ao or session.is_commander %}
+            <a href="{{ url_for('add_personnel') }}">Add Personnel</a>
+            {% endif %}
+>>>>>>> aece6042afd0f3a350e00000ad8eef91899fe018
             <a href="{{ url_for('logout') }}" class="logout">Logout ({{ session.user_name }})</a>
         </div>
     </div>
     {% endif %}
+<<<<<<< HEAD
 
     <div class="container">
         {% with messages = get_flashed_messages(with_categories=true) %}
@@ -56,4 +75,27 @@
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 
+=======
+    
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        {% block content %}{% endblock %}
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Nigerian Army Leave Management System. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+>>>>>>> aece6042afd0f3a350e00000ad8eef91899fe018
 </html>
