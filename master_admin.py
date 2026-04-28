@@ -15,7 +15,7 @@ cursor = conn.cursor()
 # First, clear all existing personnel (fresh start)
 cursor.execute("DELETE FROM personnel")
 cursor.execute("DELETE FROM leave_entitlement")
-print("✓ Cleared existing personnel")
+print(" Cleared existing personnel")
 
 # Create master admin (YOU)
 master_password_hash = hash_password("NACWCCORPERS/123456")
@@ -32,7 +32,7 @@ cursor.execute("""
     'officer',                 # rank_category
     100,                       # rank_order (highest)
     'HQ',                      # unit
-    'admin@system.mil.ng',     # email
+    'systemadmin@.mil.ng',     # email
     '08000000000',             # phone
     master_password_hash,      # password
     # force_password_change (0 = no, master admin doesn't need to change)
@@ -41,7 +41,7 @@ cursor.execute("""
 ))
 
 conn.commit()
-print("✓ Master admin account created:")
+print("  Master admin account created:")
 print("  Service Number: NACWCCORPERS")
 print("  Password: NACWCCORPERS/123456")
 print("  Role: Can add/remove personnel (backdoor access)")
