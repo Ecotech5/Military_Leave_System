@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-<<<<<<< HEAD
 
 {% block content %}
 <div class="card" style="max-width: 600px; margin: 0 auto;">
@@ -8,19 +7,6 @@
 
     <form method="POST">
         <label>Leave Type:</label>
-=======
-{% block content %}
-<div class="card">
-    <h2>Submit Leave Request</h2>
-
-    <div class="alert-info">
-        <strong>Annual Leave Limit:</strong> 14 days per year<br>
-        <strong>Your Remaining Balance:</strong> {{ remaining_days }} days
-    </div>
-
-    <form method="POST">
-        <label>Leave Type *</label>
->>>>>>> aece6042afd0f3a350e00000ad8eef91899fe018
         <select name="leave_type" required>
             <option value="annual">Annual Leave</option>
             <option value="sick">Sick Leave</option>
@@ -30,7 +16,6 @@
             <option value="paternity">Paternity Leave</option>
         </select>
 
-<<<<<<< HEAD
         <label>Start Date:</label>
         <input type="date" name="start_date" required>
 
@@ -42,19 +27,6 @@
 
         <button type="submit" class="btn btn-block">Submit Request</button>
         <a href="{{ url_for('dashboard') }}" class="btn btn-warning btn-block">Cancel</a>
-=======
-        <label>Start Date *</label>
-        <input type="date" name="start_date" required>
-
-        <label>End Date *</label>
-        <input type="date" name="end_date" required>
-
-        <label>Reason for Leave *</label>
-        <textarea name="reason" placeholder="Please provide reason for leave request" required></textarea>
-
-        <button type="submit" class="btn">Submit Request</button>
-        <a href="{{ url_for('dashboard') }}" class="btn btn-warning">Cancel</a>
->>>>>>> aece6042afd0f3a350e00000ad8eef91899fe018
     </form>
 </div>
 {% endblock %}

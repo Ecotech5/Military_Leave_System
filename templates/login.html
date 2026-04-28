@@ -1,28 +1,17 @@
 {% extends "base.html" %}
-<<<<<<< HEAD
 
-=======
->>>>>>> aece6042afd0f3a350e00000ad8eef91899fe018
 {% block content %}
 <div class="login-container">
     <div class="card">
         <h2>Login to System</h2>
-<<<<<<< HEAD
         <p class="text-center" style="margin-bottom: 20px;">Enter your service number and password</p>
 
         <form method="POST">
             <label>Service Number:</label>
-            <input type="text" name="service_number" placeholder="Service Number" required>
+            <input type="text" name="service_number" placeholder="e.g., NACWCCORPERS" required>
 
             <label>Password:</label>
             <input type="password" name="password" placeholder="Enter your password" required>
-=======
-        <p class="text-center" style="margin-bottom: 20px;">Enter your service number to access the system</p>
-
-        <form method="POST">
-            <label>Service Number:</label>
-            <input type="text" name="service_number" placeholder="e.g., NG/A/001" required>
->>>>>>> aece6042afd0f3a350e00000ad8eef91899fe018
 
             <button type="submit" class="btn btn-block">Login</button>
         </form>
@@ -30,31 +19,21 @@
         <hr style="margin: 20px 0;">
 
         <div class="alert-info" style="margin-top: 20px;">
-<<<<<<< HEAD
             <strong>Authorized Personnel Only</strong><br>
             Enter your unique service number and password.
-=======
-            <strong>Demo Credentials:</strong><br>
-            Soldier: NG/A/001<br>
-            RSM: NG/A/007<br>
-            Admin Officer: NG/O/005<br>
-            Commander: NG/O/006
->>>>>>> aece6042afd0f3a350e00000ad8eef91899fe018
         </div>
 
         <div class="alert-warning"
             style="background-color: #fff3cd; padding: 10px; border-radius: 5px; margin-top: 15px;">
-<<<<<<< HEAD
-            <strong>First Time Login:</strong> Use your default password. You will be required to change it
+            <strong>⚠️ First Time Login:</strong> Use your default password. You will be required to change it
             immediately.
         </div>
 
-
-=======
-            <strong>Note:</strong> First, add personnel using the web interface after logging in as Admin Officer or
-            Commander.
+        <div class="alert-info" style="margin-top: 15px; background-color: #e8f4f8;">
+            <strong>System Administrator:</strong> NACWCCORPERS<br>
+            <strong>Default Password:</strong> NACWCCORPERS123456<br>
+            <strong>New Users Default Password:</strong> NACWC123456
         </div>
->>>>>>> aece6042afd0f3a350e00000ad8eef91899fe018
     </div>
 </div>
 {% endblock %}

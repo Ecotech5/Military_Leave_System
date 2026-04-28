@@ -1,7 +1,8 @@
 {% extends "base.html" %}
+
 {% block content %}
-<div class="card">
-    <h2>Commander Decision - Leave Request #{{ request.id }}</h2>
+<div class="card" style="max-width: 600px; margin: 0 auto;">
+    <h2>Commander Decision - Request #{{ request.id }}</h2>
 
     <div class="alert-info">
         <strong>Requester:</strong> {{ request.personnel_name }} ({{ request.personnel_rank }})<br>
@@ -26,15 +27,15 @@
     <form method="POST">
         <label>Final Decision *</label>
         <select name="decision" required>
-            <option value="approved">Approve Leave</option>
-            <option value="rejected">Reject Leave</option>
+            <option value="approved">✅ Approve Leave</option>
+            <option value="rejected">❌ Reject Leave</option>
         </select>
 
         <label>Commander's Comments</label>
-        <textarea name="comments" placeholder="Add your final comments here..."></textarea>
+        <textarea name="comments" rows="3" placeholder="Add your final comments here..."></textarea>
 
-        <button type="submit" class="btn">Make Decision</button>
-        <a href="{{ url_for('dashboard') }}" class="btn btn-warning">Cancel</a>
+        <button type="submit" class="btn btn-block">Make Decision</button>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-warning btn-block">Cancel</a>
     </form>
 </div>
 {% endblock %}
