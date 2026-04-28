@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <h3>Leave Balance</h3>
+        <div class="number">{{ remaining_days }}</div>
+        <p>days remaining out of 14</p>
+    </div>
+    <div class="stat-card">
+        <h3>Days Used</h3>
+        <div class="number">{{ used_days }}</div>
+        <p>days used this year</p>
+    </div>
+    <div class="stat-card">
+        <h3>Pending Requests</h3>
+        <div class="number">{{ pending_requests|length }}</div>
+        <p>awaiting approval</p>
+    </div>
+    <div class="stat-card">
+        <h3>Account</h3>
+        <div class="number"><a href="{{ url_for('change_password') }}">🔒 Change<br>Password</a></div>
+        <p>Update your password</p>
+    </div>
+
+    <!-- Add Personnel Card - Only visible to authorized users -->
+    {% if can_add_personnel %}
+    <div class="stat-card" style="background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);">
+        <h3>Administration</h3>
+        <div class="number"><a href="{{ url_for('add_personnel') }}" style="color: white;">➕ Add<br>Personnel</a></div>
+        <p>Add new soldiers/officers</p>
+    </div>
+    {% endif %}
+</div>
+
+<div class="card">
+    <h2>My Leave Balance</h2>
+    <div class="progress-bar">
+        <div class="progress-fill" style="width: {{ (used_days / 14 * 100) }}%;">
+            {{ used_days }}/14 days used
+        </div>
+    </div>
+</div>
+
+{% if pending_requests %}
+<div class="card">
+    <h2>Pending Approvals ({{ pending_requests|length }})</h2>
+    <div style="overflow-x: auto;">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Requester</th>
+                    <th>Rank</th>
+                    <th>Dates</th>
+                    <th>Days</th>
+                    <th>Reason</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for req in pending_requests %}
+                <tr>
+                    <td>{{ req.id }}</td>
+                    <td>{{ req.personnel_name }}</td>
+                    <td>{{ req.personnel_rank }}</td>
+                    <td>{{ req.start_date }} to {{ req.end_date }}</td>
+                    <td>{{ req.total_days }}</td>
+                    <td>{{ req.reason[:50] }}{% if req.reason|length > 50 %}...{% endif %}</td>
+                    <td>
+                        {% if session.is_rsm %}
+                        <a href="{{ url_for('rsm_review', request_id=req.id) }}" class="btn btn-sm">Review</a>
+                        {% elif session.is_ao %}
+                        <a href="{{ url_for('ao_review', request_id=req.id) }}" class="btn btn-sm">Review</a>
+                        {% elif session.is_commander %}
+                        <a href="{{ url_for('commander_decision', request_id=req.id) }}" class="btn btn-sm">Decide</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}
+
+<div class="card">
+    <h2>My Leave Requests</h2>
+    <div style="overflow-x: auto;">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Type</th>
+                    <th>Dates</th>
+                    <th>Days</th>
+                    <th>Status</th>
+                    <th>Submitted</th>
+                    <th>Approval Trail</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for req in my_requests %}
+                <tr>
+                    <td>{{ req.id }}</td>
+                    <td>{{ req.leave_type|capitalize }}</td>
+                    <td>{{ req.start_date }} to {{ req.end_date }}</td>
+                    <td>{{ req.total_days }}</td>
+                    <td>
+                        <span class="status status-{{ req.status }}">
+                            {{ req.status.replace('_', ' ')|title }}
+                        </span>
+                    </td>
+                    <td>{{ req.submitted_date[:10] }}</td>
+                    <td style="font-size: 12px;">
+                        {% if req.rsm_name %}RSM: {{ req.rsm_recommendation }}<br>{% endif %}
+                        {% if req.ao_name %}AO: {{ req.ao_recommendation }}<br>{% endif %}
+                        {% if req.commander_name %}Commander: {{ req.commander_decision }}{% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

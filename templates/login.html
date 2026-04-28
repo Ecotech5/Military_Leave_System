@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="login-container">
+    <div class="card">
+        <h2>Login to System</h2>
+        <p class="text-center" style="margin-bottom: 20px;">Enter your service number and password</p>
+
+        <form method="POST">
+            <label>Service Number:</label>
+            <input type="text" name="service_number" placeholder="Service Number" required>
+
+            <label>Password:</label>
+            <input type="password" name="password" placeholder="Enter your password" required>
+
+            <button type="submit" class="btn btn-block">Login</button>
+        </form>
+
+        <hr style="margin: 20px 0;">
+
+        <div class="alert-info" style="margin-top: 20px;">
+            <strong>Authorized Personnel Only</strong><br>
+            Enter your unique service number and password.
+        </div>
+
+        <div class="alert-warning"
+            style="background-color: #fff3cd; padding: 10px; border-radius: 5px; margin-top: 15px;">
+            <strong>First Time Login:</strong> Use your default password. You will be required to change it
+            immediately.
+        </div>
+
+
+    </div>
+</div>
+{% endblock %}

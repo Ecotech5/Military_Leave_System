@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card" style="max-width: 600px; margin: 0 auto;">
+    <h2>Submit Leave Request</h2>
+    <div class="alert-info">Annual Leave Limit: 14 days | Your Remaining: {{ remaining_days }} days</div>
+
+    <form method="POST">
+        <label>Leave Type:</label>
+        <select name="leave_type" required>
+            <option value="annual">Annual Leave</option>
+            <option value="sick">Sick Leave</option>
+            <option value="compassionate">Compassionate Leave</option>
+            <option value="study">Study Leave</option>
+            <option value="maternity">Maternity Leave</option>
+            <option value="paternity">Paternity Leave</option>
+        </select>
+
+        <label>Start Date:</label>
+        <input type="date" name="start_date" required>
+
+        <label>End Date:</label>
+        <input type="date" name="end_date" required>
+
+        <label>Reason:</label>
+        <textarea name="reason" rows="4" placeholder="Please provide reason for leave request" required></textarea>
+
+        <button type="submit" class="btn btn-block">Submit Request</button>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-warning btn-block">Cancel</a>
+    </form>
+</div>
+{% endblock %}
